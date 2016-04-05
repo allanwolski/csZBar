@@ -95,7 +95,7 @@ implements SurfaceHolder.Callback {
 
 //        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
 
-            setUpCamera();
+            setUpCamera(null);
 
 //        } else {
 
@@ -113,7 +113,7 @@ implements SurfaceHolder.Callback {
             case CAMERA_PERMISSION_REQUEST: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    setUpCamera();
+                    setUpCamera(null);
                 } else {
 
                    onBackPressed();
@@ -125,7 +125,7 @@ implements SurfaceHolder.Callback {
             // permissions this app might request
         }
     }
-    private void setUpCamera() {
+    private void setUpCamera(String textInstructions) {
         // If request is cancelled, the result arrays are empty.
 
 
@@ -136,7 +136,10 @@ implements SurfaceHolder.Callback {
             try { params = new JSONObject(paramStr); }
             catch (JSONException e) { params = new JSONObject(); }
             String textTitle = params.optString("text_title");
-            String textInstructions = params.optString("text_instructions");
+
+            if (textInstructions == null)
+                textInstructions = params.optString("text_instructions");
+
             Boolean drawSight = params.optBoolean("drawSight", true);
             whichCamera = params.optString("camera");
             flashMode = params.optString("flash");
@@ -351,13 +354,13 @@ implements SurfaceHolder.Callback {
         android.hardware.Camera.Parameters params = camera.getParameters();
         tryStopPreview();
         tryStartPreview();
-       
+
     }
 
     public void toggleFlash(View view)
     {
-     
-       
+
+
     camera.startPreview();
         android.hardware.Camera.Parameters camParams = camera.getParameters();
         //If the flash is set to off
@@ -441,7 +444,8 @@ implements SurfaceHolder.Callback {
                     Intent result = new Intent ();
                     result.putExtra(EXTRA_QRVALUE, qrValue);
                     setResult(Activity.RESULT_OK, result);
-                    finish();
+                    setUpCamera(qrValue);
+//                    finish();
                 }
 
             }
@@ -553,7 +557,7 @@ implements SurfaceHolder.Callback {
                 setCameraDisplayOrientation(this, 0);
 
                 android.hardware.Camera.Parameters camParams = camera.getParameters();
-                
+
                 //camParams.setFlashMode(Parameters.FLASH_MODE_TORCH);
 
                 try {
