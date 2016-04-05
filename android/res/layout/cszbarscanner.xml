@@ -15,14 +15,13 @@
         android:paddingRight="5dp"
         android:gravity="center"
         android:text="@string/csZbarScannerTitle"
-        android:textColor="@color/csZbarScannerTextColor"
-        android:background="@color/csZbarScannerTextBackground"
+        android:textColor="@color/csZbarScannerTextColor"        
         android:fontFamily="sans-serif-light"
         android:textSize="15pt" />
 
     <TextView android:id="@+id/csZbarScannerInstructions"
         android:layout_gravity="center|bottom"
-        android:layout_width="296dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:paddingBottom="15dp"
@@ -31,13 +30,14 @@
         android:gravity="center"
         android:textSize="8pt"
         android:textColor="@color/csZbarScannerTextColor"
+        android:background="@color/csZbarScannerTextBackground"
         android:fontFamily="sans-serif-light"
         android:text="@string/csZbarScannerInstructions" />
 
     <RelativeLayout android:id="@+id/csZbarScannerSightContainer"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:layout_gravity="center_horizontal|bottom">
+        android:layout_gravity="top|center_horizontal">
 
         <View android:id="@+id/csZbarScannerSight"
             android:layout_width="match_parent"
