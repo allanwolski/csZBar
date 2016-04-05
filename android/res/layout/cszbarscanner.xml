@@ -54,6 +54,7 @@
             android:layout_height="50dp"
             android:id="@+id/imageButton"
             android:src="@drawable/camera_flash"
+            android:background="@android:color/transparent"
             android:onClick="toggleFlash"
             android:longClickable="true"
             android:visibility="visible"
