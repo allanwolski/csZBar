@@ -21,7 +21,7 @@
 
     <TextView android:id="@+id/csZbarScannerInstructions"
         android:layout_gravity="center|bottom"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:paddingBottom="15dp"
@@ -57,10 +57,8 @@
             android:onClick="toggleFlash"
             android:longClickable="true"
             android:visibility="visible"
-            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
-
     </RelativeLayout>
-
 </FrameLayout>
