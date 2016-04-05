@@ -95,7 +95,7 @@ implements SurfaceHolder.Callback {
 
 //        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
 
-            setUpCamera(null);
+            setUpCamera();
 
 //        } else {
 
@@ -113,7 +113,7 @@ implements SurfaceHolder.Callback {
             case CAMERA_PERMISSION_REQUEST: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    setUpCamera(null);
+                    setUpCamera();
                 } else {
 
                    onBackPressed();
@@ -125,7 +125,7 @@ implements SurfaceHolder.Callback {
             // permissions this app might request
         }
     }
-    private void setUpCamera(String textInstructions) {
+    private void setUpCamera() {
         // If request is cancelled, the result arrays are empty.
 
 
@@ -136,10 +136,7 @@ implements SurfaceHolder.Callback {
             try { params = new JSONObject(paramStr); }
             catch (JSONException e) { params = new JSONObject(); }
             String textTitle = params.optString("text_title");
-
-            if (textInstructions == null)
-                textInstructions = params.optString("text_instructions");
-
+            String textInstructions = params.optString("text_instructions");
             Boolean drawSight = params.optBoolean("drawSight", true);
             whichCamera = params.optString("camera");
             flashMode = params.optString("flash");
@@ -444,8 +441,7 @@ implements SurfaceHolder.Callback {
                     Intent result = new Intent ();
                     result.putExtra(EXTRA_QRVALUE, qrValue);
                     setResult(Activity.RESULT_OK, result);
-                    setUpCamera(qrValue);
-//                    finish();
+                    finish();
                 }
 
             }
@@ -488,7 +484,7 @@ implements SurfaceHolder.Callback {
         // Resize SurfaceView to match camera preview ratio (avoid stretching).
         Camera.Parameters params = camera.getParameters();
         Camera.Size size = params.getPreviewSize();
-        float previewRatio = (float) size.height / size.width; // swap h and w as the preview is rotated 90 degrees
+        float previewRatio = (float) surfW / surfH; // swap h and w as the preview is rotated 90 degrees
         float surfaceRatio = (float) surfW / surfH;
 
         if(previewRatio > surfaceRatio) {
