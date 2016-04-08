@@ -437,7 +437,7 @@ public class ZBarScannerActivity extends Activity
 //                for (Symbol sym : syms) {
 //                    qrValue = sym.getData();
             // Return 1st found QR code value to the calling Activity.
-            int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+            int rotation = getWindowManager().getDefaultDisplay().getRotation();
             Intent result = new Intent();
             result.putExtra(EXTRA_QRVALUE, "teste" + Integer.toString(rotation));
             setResult(Activity.RESULT_OK, result);
