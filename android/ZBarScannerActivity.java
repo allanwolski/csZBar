@@ -431,26 +431,29 @@ public class ZBarScannerActivity extends Activity
             getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
             Log.d("ApplicationTagName", "Display width in px is " + metrics.widthPixels);
+            Intent result = new Intent();
+            result.putExtra(EXTRA_QRVALUE, metrics.widthPixels);
+            setResult(Activity.RESULT_OK, result);
+            finish();
 
-            Image barcode = new Image(size.width, size.height, "Y800");
-            barcode.setData(data);
+//            Image barcode = new Image(size.width, size.height, "Y800");
+//            barcode.setData(data);
 //            barcode.setCrop((size.width - 200) / 2, 0, 200, size.height);
-
-            if (scanner.scanImage(barcode) != 0) {
-                String qrValue = "";
-
-                SymbolSet syms = scanner.getResults();
-                for (Symbol sym : syms) {
-                    qrValue = sym.getData();
-
-                    // Return 1st found QR code value to the calling Activity.
-                    Intent result = new Intent();
-                    result.putExtra(EXTRA_QRVALUE, metrics.widthPixels);
-                    setResult(Activity.RESULT_OK, result);
-                    finish();
-                }
-
-            }
+//            if (scanner.scanImage(barcode) != 0) {
+//                String qrValue = "";
+//
+//                SymbolSet syms = scanner.getResults();
+//                for (Symbol sym : syms) {
+//                    qrValue = sym.getData();
+//
+//                    // Return 1st found QR code value to the calling Activity.
+//                    Intent result = new Intent();
+//                    result.putExtra(EXTRA_QRVALUE, qrValue);
+//                    setResult(Activity.RESULT_OK, result);
+//                    finish();
+//                }
+//
+//            }
         }
     };
 
