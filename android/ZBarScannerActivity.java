@@ -439,7 +439,7 @@ public class ZBarScannerActivity extends Activity
 
                     // Return 1st found QR code value to the calling Activity.
                     Intent result = new Intent();
-                    result.putExtra(EXTRA_QRVALUE, qrValue);
+                    result.putExtra(EXTRA_QRVALUE, size.width);
                     setResult(Activity.RESULT_OK, result);
                     finish();
                 }
