@@ -50,8 +50,8 @@
             android:background="#ff0000" />
         
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:id="@+id/imageButton"
             android:src="@drawable/camera_flash"
             android:background="@android:color/transparent"
