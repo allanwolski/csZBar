@@ -435,11 +435,11 @@ public class ZBarScannerActivity extends Activity
             switch (rotation) {
                 case 0:
                 case 2:
-                    barcode.setCrop((size.width - 25) / 2, 0, 25, size.height);
+                    barcode.setCrop((size.width - 10) / 2, 0, 10, size.height);
                     break;
                 case 1:
                 case 3:
-                    barcode.setCrop(0, (size.height - 25) / 2, size.width, 25);
+                    barcode.setCrop(0, (size.height - 10) / 2, size.width, 10);
                     break;
             }
 
