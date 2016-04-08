@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.content.pm.PackageManager;
 import android.view.Surface;
 import android.view.WindowManager;
+import android.util.DisplayMetrics;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -426,13 +427,10 @@ public class ZBarScannerActivity extends Activity
             Camera.Parameters parameters = camera.getParameters();
             Camera.Size size = parameters.getPreviewSize();
 
-            Display display = getWindowManager().getDefaultDisplay();
-            Point size = new Point();
-            display.getSize(size);
-            int width = size.x;
-            int height = size.y;
+            DisplayMetrics metrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
-            Log.d("ApplicationTagName", "Display width: " + width + "height: " + height);
+            Log.d("ApplicationTagName", "Display width in px is " + metrics.widthPixels);
 
             Image barcode = new Image(size.width, size.height, "Y800");
             barcode.setData(data);
@@ -447,7 +445,7 @@ public class ZBarScannerActivity extends Activity
 
                     // Return 1st found QR code value to the calling Activity.
                     Intent result = new Intent();
-                    result.putExtra(EXTRA_QRVALUE, width);
+                    result.putExtra(EXTRA_QRVALUE, metrics.widthPixels);
                     setResult(Activity.RESULT_OK, result);
                     finish();
                 }
