@@ -426,9 +426,17 @@ public class ZBarScannerActivity extends Activity
             Camera.Parameters parameters = camera.getParameters();
             Camera.Size size = parameters.getPreviewSize();
 
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int width = size.x;
+            int height = size.y;
+
+            Log.d("ApplicationTagName", "Display width: " + width + "height: " + height);
+
             Image barcode = new Image(size.width, size.height, "Y800");
             barcode.setData(data);
-            barcode.setCrop((size.width - 200) / 2, 0, 200, size.height);
+//            barcode.setCrop((size.width - 200) / 2, 0, 200, size.height);
 
             if (scanner.scanImage(barcode) != 0) {
                 String qrValue = "";
@@ -439,7 +447,7 @@ public class ZBarScannerActivity extends Activity
 
                     // Return 1st found QR code value to the calling Activity.
                     Intent result = new Intent();
-                    result.putExtra(EXTRA_QRVALUE, size.width);
+                    result.putExtra(EXTRA_QRVALUE, width);
                     setResult(Activity.RESULT_OK, result);
                     finish();
                 }
