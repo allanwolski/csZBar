@@ -354,7 +354,7 @@ public class ZBarScannerActivity extends Activity
     }
 
     public void closeCamera(View view) {
-        setResult(RESULT_ERROR);
+        setResult(RESULT_CANCELED);
         finish();
     }
 
