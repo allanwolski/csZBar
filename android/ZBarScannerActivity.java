@@ -429,10 +429,18 @@ public class ZBarScannerActivity extends Activity
             Image barcode = new Image(size.width, size.height, "Y800");
             barcode.setData(data);
 
-            if (getWindowManager().getDefaultDisplay().getRotation().equals(0)) {
-                barcode.setCrop((size.width - 100) / 2, 0, 100, size.height);
-            } else {
-                barcode.setCrop(0, (size.width - 100) / 2, 200, size.height);
+            //Rotação da tela
+            int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+
+            switch (rotation) {
+                case 0:
+                case 2:
+                    barcode.setCrop((size.width - 100) / 2, 0, 100, size.height);
+                    break;
+                case 1:
+                case 3:
+                    barcode.setCrop(0, (size.width - 100) / 2, 100, size.height);
+                    break;
             }
 
             if (scanner.scanImage(barcode) != 0) {
