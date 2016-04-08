@@ -428,7 +428,7 @@ public class ZBarScannerActivity extends Activity
 
             Image barcode = new Image(size.width, size.height, "Y800");
             barcode.setData(data);
-            barcode.setCrop((size.height / 2) - 200, 0, 200, size.height);
+            barcode.setCrop((size.width / 2) - 200, 0, 200, size.height);
 
             if (scanner.scanImage(barcode) != 0) {
                 String qrValue = "";
