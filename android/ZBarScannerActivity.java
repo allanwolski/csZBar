@@ -439,7 +439,7 @@ public class ZBarScannerActivity extends Activity
                     break;
                 case 1:
                 case 3:
-                    barcode.setCrop(0, (size.width - 100) / 2, 100, size.height);
+                    barcode.setCrop(0, (size.height - 100) / 2, size.width, 100);
                     break;
             }
 
