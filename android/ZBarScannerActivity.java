@@ -432,7 +432,7 @@ public class ZBarScannerActivity extends Activity
 
             Log.d("ApplicationTagName", "Display width in px is " + metrics.widthPixels);
             Intent result = new Intent();
-            result.putExtra(EXTRA_QRVALUE, metrics.widthPixels);
+            result.putExtra(EXTRA_QRVALUE, "Teste" + size.width);
             setResult(Activity.RESULT_OK, result);
             finish();
 
