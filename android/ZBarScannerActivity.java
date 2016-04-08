@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.lang.RuntimeException;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.cordova.CordovaPlugin;
 
 import android.Manifest;
 import android.app.Activity;
@@ -29,6 +30,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.content.pm.PackageManager;
 import android.view.Surface;
+import android.view.WindowManager;
 
 
 import java.util.ArrayList;
@@ -94,7 +96,7 @@ implements SurfaceHolder.Callback {
 //        int permissionCheck = ContextCompat.checkSelfPermission(this.getBaseContext(), Manifest.permission.CAMERA);
 
 //        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             setUpCamera();
 
 //        } else {
