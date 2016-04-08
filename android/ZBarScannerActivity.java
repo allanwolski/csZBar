@@ -426,25 +426,30 @@ public class ZBarScannerActivity extends Activity
             Camera.Parameters parameters = camera.getParameters();
             Camera.Size size = parameters.getPreviewSize();
 
-//            Image barcode = new Image(size.width, size.height, "Y800");
-//            barcode.setData(data);
-//            barcode.setCrop((size.width - 200) / 2, 0, 200, size.height);
-//
-//            if (scanner.scanImage(barcode) != 0) {
-//                String qrValue = "";
-//
-//                SymbolSet syms = scanner.getResults();
-//                for (Symbol sym : syms) {
-//                    qrValue = sym.getData();
-            // Return 1st found QR code value to the calling Activity.
-            int rotation = getWindowManager().getDefaultDisplay().getRotation();
-            Intent result = new Intent();
-            result.putExtra(EXTRA_QRVALUE, "teste" + Integer.toString(rotation));
-            setResult(Activity.RESULT_OK, result);
-            finish();
-//                }
-//
-//            }
+            Image barcode = new Image(size.width, size.height, "Y800");
+            barcode.setData(data);
+
+            if (getWindowManager().getDefaultDisplay().getRotation().equals(0)) {
+                barcode.setCrop((size.width - 100) / 2, 0, 100, size.height);
+            } else {
+                barcode.setCrop(0, (size.width - 100) / 2, 200, size.height);
+            }
+
+            if (scanner.scanImage(barcode) != 0) {
+                String qrValue = "";
+
+                SymbolSet syms = scanner.getResults();
+                for (Symbol sym : syms) {
+                    qrValue = sym.getData();
+
+                    // Return 1st found QR code value to the calling Activity.
+                    Intent result = new Intent();
+                    result.putExtra(EXTRA_QRVALUE, qrValue);
+                    setResult(Activity.RESULT_OK, result);
+                    finish();
+                }
+
+            }
         }
     };
 
