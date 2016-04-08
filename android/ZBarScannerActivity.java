@@ -426,7 +426,7 @@ public class ZBarScannerActivity extends Activity
             Camera.Parameters parameters = camera.getParameters();
             Camera.Size size = parameters.getPreviewSize();
 
-            Image barcode = new Image(size.width, 100, "Y800");
+            Image barcode = new Image(size.width, 300, "Y800");
             barcode.setData(data);
 
             if (scanner.scanImage(barcode) != 0) {
