@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:layout_gravity="top|center_horizontal">
-
+        
         <View android:id="@+id/csZbarScannerSight"
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -48,9 +48,9 @@
             android:layout_centerInParent="true"
             android:gravity="center_vertical"
             android:background="#ff0000" />
-
+        
         <ImageButton
-            android:layout_width="60dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/imageButton"
             android:src="@drawable/camera_flash"
@@ -62,5 +62,19 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
         />
+        
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageButton"
+            android:src="@drawable/camera_close"
+            android:background="@android:color/transparent"
+            android:onClick="closeCamera"
+            android:longClickable="true"
+            android:visibility="visible"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentend="true"
+        />        
     </RelativeLayout>
 </FrameLayout>
