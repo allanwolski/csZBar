@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.lang.RuntimeException;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.apache.cordova.CordovaPlugin;
 
 import android.Manifest;
 import android.app.Activity;
