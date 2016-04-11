@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|center_horizontal"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingBottom="15dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:gravity="center"
@@ -24,8 +24,8 @@
         android:layout_gravity="center|bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:gravity="center"
@@ -51,7 +51,7 @@
         
         <ImageButton
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:id="@+id/imageButton"
             android:src="@drawable/camera_flash"
             android:background="@android:color/transparent"
@@ -65,7 +65,7 @@
         
         <ImageButton
             android:layout_width="50dp"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:id="@+id/imageButton"
             android:src="@drawable/camera_close"
             android:background="@android:color/transparent"
