@@ -18,7 +18,7 @@
         android:textColor="@color/csZbarScannerTextColor"        
         android:background="@color/csZbarScannerTextBackground"
         android:fontFamily="sans-serif-light"
-        android:textSize="15pt" />
+        android:textSize="11pt" />
 
     <TextView android:id="@+id/csZbarScannerInstructions"
         android:layout_gravity="center|bottom"
