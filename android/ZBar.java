@@ -15,24 +15,18 @@ import org.cloudsky.cordovaPlugins.ZBarScannerActivity;
 public class ZBar extends CordovaPlugin {
 
     // Configuration ---------------------------------------------------
-
     private static int SCAN_CODE = 1;
 
-
     // State -----------------------------------------------------------
-
     private boolean isInProgress = false;
     private CallbackContext scanCallbackContext;
 
-
     // Plugin API ------------------------------------------------------
-
     @Override
-    public boolean execute (String action, JSONArray args, CallbackContext callbackContext)
-    throws JSONException
-    {
-        if(action.equals("scan")) {
-            if(isInProgress) {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext)
+            throws JSONException {
+        if (action.equals("scan")) {
+            if (isInProgress) {
                 callbackContext.error("A scan is already in progress!");
             } else {
                 isInProgress = true;
@@ -45,19 +39,19 @@ public class ZBar extends CordovaPlugin {
                 cordova.startActivityForResult(this, scanIntent, SCAN_CODE);
             }
             return true;
+        } else if (action.equals("close")) {
+            super.onBackPressed();
+            return false;
         } else {
             return false;
         }
     }
 
-
     // External results handler ----------------------------------------
-
     @Override
-    public void onActivityResult (int requestCode, int resultCode, Intent result)
-    {
-        if(requestCode == SCAN_CODE) {
-            switch(resultCode) {
+    public void onActivityResult(int requestCode, int resultCode, Intent result) {
+        if (requestCode == SCAN_CODE) {
+            switch (resultCode) {
                 case Activity.RESULT_OK:
                     String barcodeValue = result.getStringExtra(ZBarScannerActivity.EXTRA_QRVALUE);
                     scanCallbackContext.success(barcodeValue);
