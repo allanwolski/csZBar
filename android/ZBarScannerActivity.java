@@ -431,7 +431,7 @@ public class ZBarScannerActivity extends Activity
             Image barcode = new Image(size.width, size.height, "Y800");
             barcode.setData(data);
 
-            //Rotação da tela
+            //Rotacao da tela
             int rotation = getWindowManager().getDefaultDisplay().getRotation();
 
             switch (rotation) {
@@ -452,11 +452,14 @@ public class ZBarScannerActivity extends Activity
                 for (Symbol sym : syms) {
                     qrValue = sym.getData();
 
-                    // Return 1st found QR code value to the calling Activity.
-                    Intent result = new Intent();
-                    result.putExtra(EXTRA_QRVALUE, qrValue);
-                    setResult(Activity.RESULT_OK, result);
-                    finish();
+                    //Validacao da Chave de Acesso
+                    if (validarChaveAcesso(qrValue)) {
+                        // Return 1st found QR code value to the calling Activity.
+                        Intent result = new Intent();
+                        result.putExtra(EXTRA_QRVALUE, qrValue);
+                        setResult(Activity.RESULT_OK, result);
+                        finish();
+                    }
                 }
             }
         }
@@ -592,5 +595,35 @@ public class ZBarScannerActivity extends Activity
                 die("Could not start camera preview: " + e.getMessage());
             }
         }
+    }
+
+    private Boolean validarChaveAcesso(String chNFe) {
+        int[] peso = new int[]{4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2, 0};
+        int soma = 0;
+
+        String[] chave = chNFe.split("");
+
+        if (chNFe.length() != 44) {
+            return false;
+        }
+
+        for (int i = 0; i < chNFe.length(); i++) {
+            soma = soma + (Integer.parseInt(chave[i]) * peso[i]);
+        }
+
+        if (soma == 0) {
+            return false;
+        }
+
+        double aux = soma - (11 * (Math.floor(soma / 11)));
+        double digito;
+
+        if (aux == 0 || aux == 1) {
+            digito = 0;
+        } else {
+            digito = 11 - aux;
+        }
+
+        return digito == Double.parseDouble(chave[43]);
     }
 }
