@@ -85,6 +85,10 @@ public class ZBarScannerActivity extends Activity
     // Activity Lifecycle ----------------------------------------------
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
 
 //        int permissionCheck = ContextCompat.checkSelfPermission(this.getBaseContext(), Manifest.permission.CAMERA);
 //        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
