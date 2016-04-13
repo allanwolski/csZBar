@@ -40,7 +40,7 @@ public class ZBar extends CordovaPlugin {
             }
             return true;
         } else if (action.equals("close")) {
-            super.onBackPressed();
+            System.exit(0);
             return false;
         } else {
             return false;
