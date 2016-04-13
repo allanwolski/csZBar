@@ -41,11 +41,7 @@ public class ZBar extends CordovaPlugin {
             }
             return true;
         } else if (action.equals("close")) {
-            Intent homeIntent = new Intent(appCtx);
-            homeIntent.addCategory(Intent.CATEGORY_HOME);
-            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(homeIntent);
-
+            cordova.getActivity().finish();
             return false;
         } else {
             return false;
