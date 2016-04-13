@@ -452,14 +452,18 @@ public class ZBarScannerActivity extends Activity
                 for (Symbol sym : syms) {
                     qrValue = sym.getData();
 
+                    // Return 1st found QR code value to the calling Activity.
+                    Intent result = new Intent();
+
                     //Validacao da Chave de Acesso
                     if (validarChaveAcesso(qrValue)) {
-                        // Return 1st found QR code value to the calling Activity.
-                        Intent result = new Intent();
                         result.putExtra(EXTRA_QRVALUE, qrValue);
                         setResult(Activity.RESULT_OK, result);
-                        finish();
+                    } else {
+                        result.putExtra(EXTRA_QRVALUE, "A chave de acesso informada é inválida.");
+                        setResult(RESULT_ERROR, result);
                     }
+                    finish();
                 }
             }
         }
