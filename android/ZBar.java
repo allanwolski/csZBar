@@ -40,7 +40,7 @@ public class ZBar extends CordovaPlugin {
             }
             return true;
         } else if (action.equals("close")) {
-            Intent intent = new Intent(cordova.getActivity().getApplicationContext(), ZBarScannerActivity.class);
+            Intent intent = getIntent();
             intent.putExtra("EXIT", true);
 
             cordova.startActivityForResult(this, intent, SCAN_CODE);
