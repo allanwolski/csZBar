@@ -20,6 +20,7 @@ public class ZBar extends CordovaPlugin {
     // State -----------------------------------------------------------
     private boolean isInProgress = false;
     private CallbackContext scanCallbackContext;
+    private Context appCtx;
 
     // Plugin API ------------------------------------------------------
     @Override
@@ -33,17 +34,17 @@ public class ZBar extends CordovaPlugin {
                 scanCallbackContext = callbackContext;
                 JSONObject params = args.optJSONObject(0);
 
-                Context appCtx = cordova.getActivity().getApplicationContext();
+                appCtx = cordova.getActivity().getApplicationContext();
                 Intent scanIntent = new Intent(appCtx, ZBarScannerActivity.class);
                 scanIntent.putExtra(ZBarScannerActivity.EXTRA_PARAMS, params.toString());
                 cordova.startActivityForResult(this, scanIntent, SCAN_CODE);
             }
             return true;
         } else if (action.equals("close")) {
-            Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-            homeIntent.addCategory(Intent.CATEGORY_HOME);
-            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(homeIntent);
+            Intent scanIntent = new Intent(appCtx, ZBarScannerActivity.class);
+            scanIntent.addCategory(Intent.CATEGORY_HOME);
+            scanIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(scanIntent);
 
             return false;
         } else {
