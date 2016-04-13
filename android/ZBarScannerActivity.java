@@ -53,6 +53,7 @@ public class ZBarScannerActivity extends Activity
     private static int autoFocusInterval = 2000; // Interval between AFcallback and next AF attempt.
 
     // Public Constants ------------------------------------------------
+    public static Activity scan;
     public static final String EXTRA_QRVALUE = "qrValue";
     public static final String EXTRA_PARAMS = "params";
     public static final int RESULT_ERROR = RESULT_FIRST_USER + 1;
@@ -85,6 +86,7 @@ public class ZBarScannerActivity extends Activity
     // Activity Lifecycle ----------------------------------------------
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        scan = this;
 //        int permissionCheck = ContextCompat.checkSelfPermission(this.getBaseContext(), Manifest.permission.CAMERA);
 //        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

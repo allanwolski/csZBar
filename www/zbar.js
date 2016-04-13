@@ -18,6 +18,9 @@ ZBar.prototype = {
             params.flash = "auto";
 
         exec(success, failure, 'CsZBar', 'scan', [params]);
+    },
+    close: function () {
+        exec(null, null, 'CsZBar', 'close', []);
     }
 };
 
