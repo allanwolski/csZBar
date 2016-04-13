@@ -40,7 +40,9 @@ public class ZBar extends CordovaPlugin {
             }
             return true;
         } else if (action.equals("close")) {
-            ZBarScannerActivity.finishActivity(0);
+            ZBarScannerActivity Activity = ZBarScannerActivity();
+            Activity.finishActivity(0);
+
             return false;
         } else {
             return false;
