@@ -1,8 +1,7 @@
-var argscheck = require('cordova/argscheck'),
-        exec = require('cordova/exec');
+var argscheck = require('cordova/argscheck');
+var exec = require('cordova/exec');
 
 function ZBar() {}
-;
 
 ZBar.prototype = {
     scan: function (params, success, failure) {
@@ -19,11 +18,7 @@ ZBar.prototype = {
             params.flash = "auto";
 
         exec(success, failure, 'CsZBar', 'scan', [params]);
-    },
-    close: function () {
-        exec(null, null, 'CsZBar', 'close', []);
     }
-
 };
 
 module.exports = new ZBar;
