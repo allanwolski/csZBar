@@ -44,8 +44,6 @@ public class ZBar extends CordovaPlugin {
             intent.putExtra("EXIT", true);
 
             cordova.startActivityForResult(this, intent, SCAN_CODE);
-            startActivity(intent);
-
             return false;
         } else {
             return false;
