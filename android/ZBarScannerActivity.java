@@ -87,16 +87,16 @@ public class ZBarScannerActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) {
         scan = this;
-//        int permissionCheck = ContextCompat.checkSelfPermission(this.getBaseContext(), Manifest.permission.CAMERA);
-//        if(permissionCheck == PackageManager.PERMISSION_GRANTED){
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        setUpCamera();
+        int permissionCheck = ContextCompat.checkSelfPermission(this.getBaseContext(), Manifest.permission.CAMERA);
 
-//        } else {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA},
-//                    CAMERA_PERMISSION_REQUEST);
-//        }
+        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+            setUpCamera();
+        } else {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CAMERA},
+                    CAMERA_PERMISSION_REQUEST);
+        }
         super.onCreate(savedInstanceState);
 
     }
