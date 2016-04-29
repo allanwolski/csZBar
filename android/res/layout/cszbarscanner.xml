@@ -66,7 +66,7 @@
         <ImageButton
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:id="@+id/imageButton"
+            android:id="@+id/closeButton"
             android:src="@drawable/camera_close"
             android:background="@android:color/transparent"
             android:onClick="closeCamera"
