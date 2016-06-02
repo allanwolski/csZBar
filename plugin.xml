@@ -17,6 +17,7 @@
     </js-module>
 
     <platform name="android">
+        <framework src="com.android.support:support-v4:23.0.+" />
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="CsZBar">
                 <param name="android-package" value="org.cloudsky.cordovaPlugins.ZBar"/>
