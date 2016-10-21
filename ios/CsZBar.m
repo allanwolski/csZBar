@@ -99,7 +99,7 @@
         [self.scanReader.view addSubview:toolbarViewFlash];
 
         if (drawSight) {
-            CGFloat dim = screenWidth / 1.1;
+            CGFloat dim = screenWidth < screenHeight ? 10 : 40;
             UIView *polygonView = [[UIView alloc] initWithFrame: CGRectMake  ( (screenWidth/2) - (dim/2), (screenHeight/2) - (dim/2), dim, dim)];
             
             UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0,dim / 2, dim, 1)];
@@ -107,7 +107,7 @@
             [polygonView addSubview:lineView];
 
             self.scanReader.cameraOverlayView = polygonView;
-        }
+        }z
 
         [self.viewController presentViewController:self.scanReader animated:YES completion:nil];
     }
