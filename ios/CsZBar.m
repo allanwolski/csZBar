@@ -81,8 +81,8 @@
         UIView *infoButton = [[[[[self.scanReader.view.subviews objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:infoButtonIndex];
         [infoButton setHidden:YES];
 		
-		//UIButton *cancelButton = [[[[[reader.view.subviews objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0];
-		//[cancelButton setTitle:@"Cancelar" forState:UIControlStateNormal];
+		UIButton *cancelButton = [[[[[[[reader.view.subviews objectAtIndex:2] subviews] objectAtIndex:0] subviews] objectAtIndex:2] subviews] objectAtIndex:0];
+		[cancelButton setTitle:@"Cancelar" forState:UIControlStateNormal];
 
         //UIButton *button = [UIButton buttonWithType:UIButtonTypeSystem]; [button setTitle:@"Press Me" forState:UIControlStateNormal]; [button sizeToFit]; [self.view addSubview:button];
         CGRect screenRect = [[UIScreen mainScreen] bounds];
