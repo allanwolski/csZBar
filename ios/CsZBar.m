@@ -99,7 +99,7 @@
         [self.scanReader.view addSubview:toolbarViewFlash];
 
         if (drawSight) {
-            CGFloat dim = screenWidth < screenHeight ? 10 : 40;
+            CGFloat dim = screenWidth < screenHeight ? 10.0 : 40.0;
             UIView *polygonView = [[UIView alloc] initWithFrame: CGRectMake  ( (screenWidth/2) - (dim/2), (screenHeight/2) - (dim/2), dim, dim)];
             
             UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0,dim / 2, dim, 1)];
