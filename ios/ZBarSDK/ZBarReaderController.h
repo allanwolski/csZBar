@@ -72,7 +72,6 @@ typedef enum {
 
     UIToolbar *toolbar;
     UIBarButtonItem *cancelBtn, *scanBtn, *space[3];
-	UIBarButtonItem *cancelBtn = [initWithTitle : @"Cancelar" style : UIBarButtonItemStyleDone];
     UIButton *infoBtn;
 
     id <ZBarReaderDelegate> readerDelegate;
