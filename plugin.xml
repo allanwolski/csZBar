@@ -18,9 +18,6 @@
     </js-module>
 
     <platform name="android">
-        <edit-config file="AndroidManifest.xml" target="/manifest/application/activity[@android:name='MainActivity']" mode="overwrite">
-            <activity android:theme="@android:style/Theme.DeviceDefault.NoActionBar.Fullscreen" />
-        </edit-config>		
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="CsZBar">
                 <param name="android-package" value="org.cloudsky.cordovaPlugins.ZBar"/>
