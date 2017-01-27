@@ -270,7 +270,7 @@ public class ZBarScannerActivity extends Activity
         } else {  // back-facing
             result = (info.orientation - degrees + 360) % 360;
         }
-        camera.setDisplayOrientation(result);
+//        camera.setDisplayOrientation(result);
     }
 
     @Override
