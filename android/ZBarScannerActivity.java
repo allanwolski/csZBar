@@ -270,7 +270,7 @@ public class ZBarScannerActivity extends Activity
         } else {  // back-facing
             result = (info.orientation - degrees + 360) % 360;
         }
-//        camera.setDisplayOrientation(result);
+        camera.setDisplayOrientation(result);
     }
 
     @Override
@@ -566,8 +566,11 @@ public class ZBarScannerActivity extends Activity
                 }
                 // 90 degrees rotation for Portrait orientation Activity.
                 // camera.setDisplayOrientation(rotation);
-                setCameraDisplayOrientation(this, 0);
+                if (camera == null) {
+                    camera = Camera.open();
+                }
 
+                setCameraDisplayOrientation(this, 0);
                 android.hardware.Camera.Parameters camParams = camera.getParameters();
 
                 //camParams.setFlashMode(Parameters.FLASH_MODE_TORCH);
