@@ -481,12 +481,12 @@ public class ZBarScannerActivity extends Activity
 
     // Release the camera resources and state.
     private void releaseCamera() {
-//        if (camera != null) {
-//            autoFocusHandler.removeCallbacks(doAutoFocus);
-//            camera.setPreviewCallback(null);
-//            camera.release();
-//            camera = null;
-//        }
+        if (camera != null) {
+            autoFocusHandler.removeCallbacks(doAutoFocus);
+            camera.setPreviewCallback(null);
+            camera.release();
+            camera = null;
+        }
     }
 
     // Match the aspect ratio of the preview SurfaceView with the camera's preview aspect ratio,
@@ -542,30 +542,7 @@ public class ZBarScannerActivity extends Activity
     private void tryStartPreview() {
         if (holder != null) {
             try {
-                int rotation = getWindowManager().getDefaultDisplay().getRotation();
-                switch (rotation) {
-                    case 0: // '\0'
-                        rotation = 90;
-                        break;
-
-                    case 1: // '\001'
-                        rotation = 0;
-                        break;
-
-                    case 2: // '\002'
-                        rotation = 270;
-                        break;
-
-                    case 3: // '\003'
-                        rotation = 180;
-                        break;
-
-                    default:
-                        rotation = 90;
-                        break;
-                }
                 // 90 degrees rotation for Portrait orientation Activity.
-                // camera.setDisplayOrientation(rotation);
                 setCameraDisplayOrientation(this, 0);
                 android.hardware.Camera.Parameters camParams = camera.getParameters();
 
@@ -587,7 +564,7 @@ public class ZBarScannerActivity extends Activity
                     // simple and stupid focus method, we get to turn the flash
                     // on during autofocus.
                 }
-            } catch (IOException e) {
+            } catch (Exception e) {
                 die("Could not start camera preview: " + e.getMessage());
             }
         }
