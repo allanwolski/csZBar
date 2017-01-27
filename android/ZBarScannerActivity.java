@@ -540,7 +540,7 @@ public class ZBarScannerActivity extends Activity
     // Start the camera preview if possible.
     // If start is attempted but fails, exit with error message.
     private void tryStartPreview() {
-        if (holder != null) {
+        if (holder != null && camera != null) {
             try {
                 int rotation = getWindowManager().getDefaultDisplay().getRotation();
                 switch (rotation) {
@@ -566,10 +566,6 @@ public class ZBarScannerActivity extends Activity
                 }
                 // 90 degrees rotation for Portrait orientation Activity.
                 // camera.setDisplayOrientation(rotation);
-                if (camera == null) {
-                    camera = Camera.open();
-                }
-
                 setCameraDisplayOrientation(this, 0);
                 android.hardware.Camera.Parameters camParams = camera.getParameters();
 
