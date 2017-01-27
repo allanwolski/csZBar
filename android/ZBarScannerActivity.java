@@ -566,7 +566,7 @@ public class ZBarScannerActivity extends Activity
                 }
                 // 90 degrees rotation for Portrait orientation Activity.
                 // camera.setDisplayOrientation(rotation);
-//                setCameraDisplayOrientation(this, 0);
+                setCameraDisplayOrientation(this, 0);
 
                 android.hardware.Camera.Parameters camParams = camera.getParameters();
 
