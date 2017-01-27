@@ -242,12 +242,12 @@ public class ZBarScannerActivity extends Activity
     }
 
     private void setCameraDisplayOrientation(Activity activity, int cameraId) {
-        android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.CameraInfo info
+                = new android.hardware.Camera.CameraInfo();
         android.hardware.Camera.getCameraInfo(cameraId, info);
-
-        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
+        int rotation = activity.getWindowManager().getDefaultDisplay()
+                .getRotation();
         int degrees = 0;
-
         switch (rotation) {
             case Surface.ROTATION_0:
                 degrees = 0;
@@ -270,12 +270,7 @@ public class ZBarScannerActivity extends Activity
         } else {  // back-facing
             result = (info.orientation - degrees + 360) % 360;
         }
-
-        try {
-            //camera.setDisplayOrientation(result);
-        } catch (NullPointerException e) {
-            //java.lang.NullPointerException
-        }
+        camera.setDisplayOrientation(result);
     }
 
     @Override
@@ -571,7 +566,7 @@ public class ZBarScannerActivity extends Activity
                 }
                 // 90 degrees rotation for Portrait orientation Activity.
                 // camera.setDisplayOrientation(rotation);
-                setCameraDisplayOrientation(this, 0);
+//                setCameraDisplayOrientation(this, 0);
 
                 android.hardware.Camera.Parameters camParams = camera.getParameters();
 
