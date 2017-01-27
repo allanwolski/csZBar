@@ -273,7 +273,7 @@ public class ZBarScannerActivity extends Activity
 
         try {
             camera.setDisplayOrientation(result);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             //java.lang.NullPointerException
         }
     }
