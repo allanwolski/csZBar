@@ -456,7 +456,7 @@ public class ZBarScannerActivity extends Activity
                     Intent result = new Intent();
                     result.putExtra(EXTRA_QRVALUE, qrValue);
                     setResult(Activity.RESULT_OK, result);
-                    finish();
+//                    finish();
                 }
             }
         }
@@ -564,7 +564,7 @@ public class ZBarScannerActivity extends Activity
                     // simple and stupid focus method, we get to turn the flash
                     // on during autofocus.
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 die("Could not start camera preview: " + e.getMessage());
             }
         }
