@@ -481,12 +481,12 @@ public class ZBarScannerActivity extends Activity
 
     // Release the camera resources and state.
     private void releaseCamera() {
-        if (camera != null) {
-            autoFocusHandler.removeCallbacks(doAutoFocus);
-            camera.setPreviewCallback(null);
-            camera.release();
-            camera = null;
-        }
+//        if (camera != null) {
+//            autoFocusHandler.removeCallbacks(doAutoFocus);
+//            camera.setPreviewCallback(null);
+//            camera.release();
+//            camera = null;
+//        }
     }
 
     // Match the aspect ratio of the preview SurfaceView with the camera's preview aspect ratio,
@@ -540,7 +540,7 @@ public class ZBarScannerActivity extends Activity
     // Start the camera preview if possible.
     // If start is attempted but fails, exit with error message.
     private void tryStartPreview() {
-        if (holder != null && camera != null) {
+        if (holder != null) {
             try {
                 int rotation = getWindowManager().getDefaultDisplay().getRotation();
                 switch (rotation) {
