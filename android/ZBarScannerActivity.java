@@ -456,7 +456,7 @@ public class ZBarScannerActivity extends Activity
                     Intent result = new Intent();
                     result.putExtra(EXTRA_QRVALUE, qrValue);
                     setResult(Activity.RESULT_OK, result);
-//                    finish();
+                    finish();
                 }
             }
         }
