@@ -547,12 +547,11 @@ public class ZBarScannerActivity extends Activity
 
                 if (camera == null) {
                     camera = Camera.open();
-                }
-
-                android.hardware.Camera.Parameters camParams = camera.getParameters();
+                }                
 
                 //camParams.setFlashMode(Parameters.FLASH_MODE_TORCH);
                 try {
+                    android.hardware.Camera.Parameters camParams = camera.getParameters();
                     camParams.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
                     camera.setParameters(camParams);
                 } catch (Exception e) {
