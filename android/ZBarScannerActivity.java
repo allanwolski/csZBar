@@ -275,7 +275,7 @@ public class ZBarScannerActivity extends Activity
 
     @Override
     public void onPause() {
-        releaseCamera();
+       // releaseCamera();
         super.onPause();
     }
 
