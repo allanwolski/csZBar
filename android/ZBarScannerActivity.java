@@ -544,6 +544,11 @@ public class ZBarScannerActivity extends Activity
             try {
                 // 90 degrees rotation for Portrait orientation Activity.
                 // setCameraDisplayOrientation(this, 0);
+
+                if (camera == null) {
+                    camera = Camera.open();
+                }
+
                 android.hardware.Camera.Parameters camParams = camera.getParameters();
 
                 //camParams.setFlashMode(Parameters.FLASH_MODE_TORCH);
