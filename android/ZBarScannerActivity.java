@@ -229,15 +229,10 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-       getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                camera.cancelAutoFocus();
-                camera.autoFocus(new Camera.AutoFocusCallback() {
-                        @Override
-                        public void onAutoFocus(boolean success, Camera camera) {}
-                });
-            }
+        camera.cancelAutoFocus();
+        camera.autoFocus(new Camera.AutoFocusCallback() {
+                @Override
+                public void onAutoFocus(boolean success, Camera camera) {}
         });
 
         return super.onTouchEvent(event);
