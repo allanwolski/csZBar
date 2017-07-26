@@ -23,7 +23,7 @@ public class ZBar extends CordovaPlugin {
     private boolean isInProgress = false;
     private CallbackContext scanCallbackContext;
     private JSONObject params;
-    
+
     // Permissions
     private String[] permissions = {Manifest.permission.CAMERA};
 
