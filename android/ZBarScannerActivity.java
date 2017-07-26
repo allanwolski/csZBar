@@ -33,6 +33,7 @@ import android.view.WindowManager;
 import android.view.MotionEvent;
 import android.view.Display;
 import android.graphics.Rect;
+import android.graphics.Point;
 
 import java.util.ArrayList;
 import java.util.Collection;
