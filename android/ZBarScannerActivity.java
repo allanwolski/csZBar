@@ -95,7 +95,7 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
 //                    new String[]{Manifest.permission.CAMERA},
 //                    CAMERA_PERMISSION_REQUEST);
 //        }
-//        super.onCreate(savedInstanceState);
+        super.onCreate(savedInstanceState);
 
     }
 
