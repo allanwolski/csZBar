@@ -229,6 +229,7 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        die("sfddf");
         if (camera != null) {
             camera.autoFocus(autoFocusCb);
         }
