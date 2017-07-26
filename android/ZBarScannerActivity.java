@@ -30,6 +30,7 @@ import android.widget.TextView;
 import android.content.pm.PackageManager;
 import android.view.Surface;
 import android.view.WindowManager;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 import java.util.Collection;
