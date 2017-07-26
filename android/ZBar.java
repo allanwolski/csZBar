@@ -28,13 +28,13 @@ public class ZBar extends CordovaPlugin {
     
     //permissions
     private String[] permissions = {Manifest.permission.CAMERA};
-    private JSONObject params;    
+    private JSONArray scanArgs;    
 
     // Plugin API
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         scanCallbackContext = callbackContext;
-        params = args.optJSONObject(0);
+        scanArgs = args
 
         if (hasPermission()) {
             if (action.equals("scan")) {
@@ -42,6 +42,7 @@ public class ZBar extends CordovaPlugin {
                     callbackContext.error("A scan is already in progress!");
                 } else {
                     isInProgress = true;
+                    JSONObject params = args.optJSONObject(0);
 
                     Context appCtx = cordova.getActivity().getApplicationContext();
                     Intent scanIntent = new Intent(appCtx, ZBarScannerActivity.class);
@@ -71,17 +72,13 @@ public class ZBar extends CordovaPlugin {
         return true;
     }
 
-    public void PermissionHelper.onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case CAMERA_PERMISSION_REQUEST: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    isInProgress = true;
-
-                    Context appCtx = cordova.getActivity().getApplicationContext();
-                    Intent scanIntent = new Intent(appCtx, ZBarScannerActivity.class);
-                    scanIntent.putExtra(ZBarScannerActivity.EXTRA_PARAMS, params.toString());
-                    cordova.startActivityForResult(this, scanIntent, SCAN_CODE);
+                    execute("scan", scanArgs, scanCallbackContext);
                 }
+
                 return;
             }
         }
