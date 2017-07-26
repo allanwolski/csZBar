@@ -16,6 +16,9 @@ import org.apache.cordova.PermissionHelper;
 import org.cloudsky.cordovaPlugins.ZBarScannerActivity;
 
 public class ZBar extends CordovaPlugin {
+    // Public Constants
+    private static final int CAMERA_PERMISSION_REQUEST = 1;
+
     // Configuration
     private static int SCAN_CODE = 1;
 
