@@ -233,7 +233,7 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
             camera.autoFocus(autoFocusCb);
         }
         
-        setResult(Activity.RESULT_ERROR, "asd");
+        setResult(Activity.RESULT_OK, "asd");
         return super.onTouchEvent(event);
     }
 
