@@ -20,6 +20,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.util.DisplayMetrics
 import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -31,6 +32,7 @@ import android.content.pm.PackageManager;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.view.MotionEvent;
+import android.graphics.Rect
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -227,13 +229,50 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
         camera.setDisplayOrientation(result);
     }
 
+    AutoFocusCallback myAutoFocusCallback = new AutoFocusCallback(){
+        @Override
+        public void onAutoFocus(boolean arg0, Camera arg1) {
+            if (arg0){
+                camera.cancelAutoFocus();      
+            }
+        }
+        };    
+    
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        camera.cancelAutoFocus();
-        camera.autoFocus(new Camera.AutoFocusCallback() {
-                @Override
-                public void onAutoFocus(boolean success, Camera camera) {}
-        });
+        float x = event.getX();
+        float y = event.getY();
+
+        Rect touchRect = new Rect(
+            (int)(x - 100), 
+            (int)(y - 100), 
+            (int)(x + 100), 
+            (int)(y + 100));
+
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int width = metrics.widthPixels;
+        int height = metrics.heightPixels;
+
+        final Rect targetFocusRect = new Rect(
+            touchRect.left * 2000/width - 1000,
+            touchRect.top * 2000/height - 1000,
+            touchRect.right * 2000/width - 1000,
+            touchRect.bottom * 2000/height - 1000);
+
+        try {
+            List<Camera.Area> focusList = new ArrayList<Camera.Area>();
+            Camera.Area focusArea = new Camera.Area(targetFocusRect, 1000);
+            focusList.add(focusArea);
+
+            Camera.Parameters param = camera.getParameters();
+            param.setFocusAreas(focusList);
+            param.setMeteringAreas(focusList);
+            camera.setParameters(param);
+
+            camera.autoFocus(myAutoFocusCallback);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         return super.onTouchEvent(event);
     }
