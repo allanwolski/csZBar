@@ -226,6 +226,53 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
         camera.setDisplayOrientation(result);
     }
 
+    AutoFocusCallback myAutoFocusCallback = new AutoFocusCallback(){
+        @Override
+        public void onAutoFocus(boolean arg0, Camera arg1) {
+            if (arg0){
+                camera.cancelAutoFocus();      
+            }
+        }
+    };
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        float x = event.getX();
+        float y = event.getY();
+
+        Rect touchRect = new Rect(
+            (int)(x - 100), 
+            (int)(y - 100), 
+            (int)(x + 100), 
+            (int)(y + 100)
+        );
+
+        Rect targetFocusRect = new Rect(
+            touchRect.left * 2000/this.getWidth() - 1000,
+            touchRect.top * 2000/this.getHeight() - 1000,
+            touchRect.right * 2000/this.getWidth() - 1000,
+            touchRect.bottom * 2000/this.getHeight() - 1000
+        );
+
+        try {
+            List<Camera.Area> focusList = new ArrayList<Camera.Area>();
+            Camera.Area focusArea = new Camera.Area(targetFocusRect, 1000);
+            focusList.add(focusArea);
+
+            Camera.Parameters param = camera.getParameters();
+            param.setFocusAreas(focusList);
+            param.setMeteringAreas(focusList);
+            camera.setParameters(param);
+
+            camera.autoFocus(myAutoFocusCallback);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.i(TAG, "Unable to autofocus");
+        }
+        
+        return super.onTouchEvent(event);
+    }
+
     @Override
     public void onPause() {
         releaseCamera();
