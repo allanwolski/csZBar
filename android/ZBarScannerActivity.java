@@ -500,7 +500,7 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
         if (holder != null) {
             try {
                 // 90 degrees rotation for Portrait orientation Activity.
-                // setCameraDisplayOrientation(this, 0);             
+                // setCameraDisplayOrientation(this, 0);
 
                 //camParams.setFlashMode(Parameters.FLASH_MODE_TORCH);
                 try {
