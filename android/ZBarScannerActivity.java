@@ -20,7 +20,6 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -32,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.view.MotionEvent;
+import android.view.Display;
 import android.graphics.Rect;
 
 import java.util.ArrayList;
@@ -249,9 +249,11 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
             (int)(x + 100), 
             (int)(y + 100));
 
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        int width = metrics.widthPixels;
-        int height = metrics.heightPixels;
+        Display display = getWindowManager().getDefaultDisplay();
+        Point size = new Point();
+        display.getSize(size);
+        int width = size.x;
+        int height = size.y;
 
         final Rect targetFocusRect = new Rect(
             touchRect.left * 2000/width - 1000,
