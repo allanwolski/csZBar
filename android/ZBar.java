@@ -34,7 +34,7 @@ public class ZBar extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         scanCallbackContext = callbackContext;
-        scanArgs = args
+        scanArgs = args;
 
         if (hasPermission()) {
             if (action.equals("scan")) {
