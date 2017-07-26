@@ -30,10 +30,6 @@ import android.widget.TextView;
 import android.content.pm.PackageManager;
 import android.view.Surface;
 import android.view.WindowManager;
-import android.view.MotionEvent;
-import android.view.Display;
-import android.graphics.Rect;
-import android.graphics.Point;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -228,56 +224,6 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
             result = (info.orientation - degrees + 360) % 360;
         }
         camera.setDisplayOrientation(result);
-    }
-
-    AutoFocusCallback myAutoFocusCallback = new AutoFocusCallback(){
-        @Override
-        public void onAutoFocus(boolean arg0, Camera arg1) {
-            if (arg0){
-                camera.cancelAutoFocus();      
-            }
-        }
-        };    
-    
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        float x = event.getX();
-        float y = event.getY();
-
-        Rect touchRect = new Rect(
-            (int)(x - 100), 
-            (int)(y - 100), 
-            (int)(x + 100), 
-            (int)(y + 100));
-
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
-
-        final Rect targetFocusRect = new Rect(
-            touchRect.left * 2000/width - 1000,
-            touchRect.top * 2000/height - 1000,
-            touchRect.right * 2000/width - 1000,
-            touchRect.bottom * 2000/height - 1000);
-
-        try {
-            List<Camera.Area> focusList = new ArrayList<Camera.Area>();
-            Camera.Area focusArea = new Camera.Area(targetFocusRect, 1000);
-            focusList.add(focusArea);
-
-            Camera.Parameters param = camera.getParameters();
-            param.setFocusAreas(focusList);
-            param.setMeteringAreas(focusList);
-            camera.setParameters(param);
-
-            camera.autoFocus(myAutoFocusCallback);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return super.onTouchEvent(event);
     }
 
     @Override
