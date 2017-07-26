@@ -43,23 +43,21 @@ import net.sourceforge.zbar.Symbol;
 import net.sourceforge.zbar.SymbolSet;
 import net.sourceforge.zbar.Config;
 
-public class ZBarScannerActivity extends Activity
-        implements SurfaceHolder.Callback {
-
+public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callback {
     //for barcode types
     private Collection<ZBarcodeFormat> mFormats = null;
 
-    // Config ----------------------------------------------------------
+    // Config
     private static int autoFocusInterval = 2000; // Interval between AFcallback and next AF attempt.
 
-    // Public Constants ------------------------------------------------
+    // Public Constants
     public static Activity scan;
     public static final String EXTRA_QRVALUE = "qrValue";
     public static final String EXTRA_PARAMS = "params";
     public static final int RESULT_ERROR = RESULT_FIRST_USER + 1;
     private static final int CAMERA_PERMISSION_REQUEST = 1;
-    // State -----------------------------------------------------------
 
+    // State
     private Camera camera;
     private Handler autoFocusHandler;
     private SurfaceView scannerSurface;
@@ -77,13 +75,13 @@ public class ZBarScannerActivity extends Activity
     private String package_name;
     private Resources resources;
 
-    // Static initialisers (class) -------------------------------------
+    // Static initialisers (class)
     static {
         // Needed by ZBar??
         System.loadLibrary("iconv");
     }
 
-    // Activity Lifecycle ----------------------------------------------
+    // Activity Lifecycle
     @Override
     public void onCreate(Bundle savedInstanceState) {
         scan = this;
@@ -220,25 +218,6 @@ public class ZBarScannerActivity extends Activity
             // die(e.getMessage());
             return;
         }
-
-        /*  Camera.Parameters camParams = camera.getParameters();
-       if(flashMode.equals("on")) {
-            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_ON);
-        } else if(flashMode.equals("off")) {
-            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_OFF);
-        } else {
-            camParams.setFlashMode(Camera.Parameters.FLASH_MODE_AUTO);
-        }
-        if (android.os.Build.VERSION.SDK_INT >= 14) {
-        	camParams.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);
-        }
-
-        try { camera.setParameters(camParams); }
-        catch (RuntimeException e) {
-            Log.d("csZBar", "Unsupported camera parameter reported for flash mode: "+flashMode);
-        }
-
-        tryStartPreview();*/
     }
 
     private void setCameraDisplayOrientation(Activity activity, int cameraId) {
@@ -274,7 +253,11 @@ public class ZBarScannerActivity extends Activity
     @Override
     public void onPause() {
         releaseCamera();
-        scannerSurface.setVisibility(View.GONE);
+
+        if (scannerSurface != null) {
+            scannerSurface.setVisibility(View.GONE);
+        }
+
         super.onPause();
     }
 
@@ -286,14 +269,14 @@ public class ZBarScannerActivity extends Activity
         super.onDestroy();
     }
 
-    // Event handlers --------------------------------------------------
+    // Event handlers
     @Override
     public void onBackPressed() {
         setResult(RESULT_CANCELED);
         super.onBackPressed();
     }
 
-    // SurfaceHolder.Callback implementation ---------------------------
+    // SurfaceHolder.Callback implementation
     @Override
     public void surfaceCreated(SurfaceHolder hld) {
         tryStopPreview();
