@@ -269,7 +269,6 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
             camera.autoFocus(myAutoFocusCallback);
         } catch (Exception e) {
             e.printStackTrace();
-            Log.i(TAG, "Unable to autofocus");
         }
         
         return super.onTouchEvent(event);
