@@ -79,7 +79,6 @@ public class ZBar extends CordovaPlugin {
             for (int r : grantResults) {
                 if (r == PackageManager.PERMISSION_DENIED) {
                     hasAllPermissions = false;
-                    scanCallbackContext.error("Unknown error");
                 }
             }
 
@@ -102,10 +101,10 @@ public class ZBar extends CordovaPlugin {
                     scanCallbackContext.error("cancelled");
                     break;
                 case ZBarScannerActivity.RESULT_ERROR:
-                    scanCallbackContext.error("Scan failed due to an error");
+                    scanCallbackContext.error("Falha ao tentar digitalizar o Código de Barras");
                     break;
                 default:
-                    scanCallbackContext.error("Unknown error");
+                    scanCallbackContext.error("Erro não tratado");
             }
             isInProgress = false;
             scanCallbackContext = null;
