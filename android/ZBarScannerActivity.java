@@ -20,7 +20,7 @@ import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.util.DisplayMetrics
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -32,7 +32,7 @@ import android.content.pm.PackageManager;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.view.MotionEvent;
-import android.graphics.Rect
+import android.graphics.Rect;
 
 import java.util.ArrayList;
 import java.util.Collection;
