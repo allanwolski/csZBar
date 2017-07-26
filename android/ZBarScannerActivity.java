@@ -210,6 +210,8 @@ public class ZBarScannerActivity extends Activity
                 camera = Camera.open();
             }
 
+            scannerSurface.setVisibility(View.VISIBLE);
+
             if (camera == null) {
                 throw new Exception("Error: No suitable camera found.");
             }
@@ -242,11 +244,9 @@ public class ZBarScannerActivity extends Activity
     }
 
     private void setCameraDisplayOrientation(Activity activity, int cameraId) {
-        android.hardware.Camera.CameraInfo info
-                = new android.hardware.Camera.CameraInfo();
+        android.hardware.Camera.CameraInfo info = new android.hardware.Camera.CameraInfo();
         android.hardware.Camera.getCameraInfo(cameraId, info);
-        int rotation = activity.getWindowManager().getDefaultDisplay()
-                .getRotation();
+        int rotation = activity.getWindowManager().getDefaultDisplay().getRotation();
         int degrees = 0;
         switch (rotation) {
             case Surface.ROTATION_0:
@@ -276,6 +276,7 @@ public class ZBarScannerActivity extends Activity
     @Override
     public void onPause() {
         releaseCamera();
+        scannerSurface.setVisibility(View.GONE);
         super.onPause();
     }
 
@@ -543,11 +544,7 @@ public class ZBarScannerActivity extends Activity
         if (holder != null) {
             try {
                 // 90 degrees rotation for Portrait orientation Activity.
-                // setCameraDisplayOrientation(this, 0);
-
-                if (camera == null) {
-                    camera = Camera.open();
-                }                
+                // setCameraDisplayOrientation(this, 0);             
 
                 //camParams.setFlashMode(Parameters.FLASH_MODE_TORCH);
                 try {
