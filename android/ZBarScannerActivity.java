@@ -55,7 +55,6 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
     public static final String EXTRA_QRVALUE = "qrValue";
     public static final String EXTRA_PARAMS = "params";
     public static final int RESULT_ERROR = RESULT_FIRST_USER + 1;
-    private static final int CAMERA_PERMISSION_REQUEST = 1;
 
     // State
     private Camera camera;
@@ -85,34 +84,11 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
     @Override
     public void onCreate(Bundle savedInstanceState) {
         scan = this;
-//        int permissionCheck = ContextCompat.checkSelfPermission(this.getBaseContext(), Manifest.permission.CAMERA);
 
-//        if (permissionCheck == PackageManager.PERMISSION_GRANTED) {
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            setUpCamera();
-//        } else {
-//            ActivityCompat.requestPermissions(this,
-//                    new String[]{Manifest.permission.CAMERA},
-//                    CAMERA_PERMISSION_REQUEST);
-//        }
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        setUpCamera();
+
         super.onCreate(savedInstanceState);
-
-    }
-
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case CAMERA_PERMISSION_REQUEST: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    setUpCamera();
-                } else {
-                    onBackPressed();
-                }
-                return;
-            }
-
-            // other 'case' lines to check for other
-            // permissions this app might request
-        }
     }
 
     private void setUpCamera() {
@@ -334,7 +310,6 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
         android.hardware.Camera.Parameters params = camera.getParameters();
         tryStopPreview();
         tryStartPreview();
-
     }
 
     public void closeCamera(View view) {
@@ -381,9 +356,9 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
             Log.d("csZBar", (new StringBuilder("Wrong holder data")).append(flashMode).toString());
         }
     }
-    // Continuously auto-focus -----------------------------------------
-    // For API Level < 14
 
+    // Continuously auto-focus
+    // For API Level < 14
     private AutoFocusCallback autoFocusCb = new AutoFocusCallback() {
         public void onAutoFocus(boolean success, Camera camera) {
             // some devices crash without this try/catch and cancelAutoFocus()... (#9)
@@ -403,7 +378,7 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
         }
     };
 
-    // Camera callbacks ------------------------------------------------
+    // Camera callbacks
     // Receives frames from the camera and checks for barcodes.
     private PreviewCallback previewCb = new PreviewCallback() {
         public void onPreviewFrame(byte[] data, Camera camera) {
@@ -444,7 +419,7 @@ public class ZBarScannerActivity extends Activity implements SurfaceHolder.Callb
         }
     };
 
-    // Misc ------------------------------------------------------------
+    // Misc
     // finish() due to error
     private void die(String msg) {
         setResult(RESULT_ERROR);
