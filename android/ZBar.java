@@ -16,25 +16,22 @@ import org.apache.cordova.PermissionHelper;
 import org.cloudsky.cordovaPlugins.ZBarScannerActivity;
 
 public class ZBar extends CordovaPlugin {
-    // Public Constants
-    private static final int CAMERA_PERMISSION_REQUEST = 1;
-
     // Configuration
     private static int SCAN_CODE = 1;
 
     // State
     private boolean isInProgress = false;
     private CallbackContext scanCallbackContext;
+    private JSONObject params;
     
-    //permissions
+    // Permissions
     private String[] permissions = {Manifest.permission.CAMERA};
-    private JSONArray scanArgs;    
 
     // Plugin API
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         scanCallbackContext = callbackContext;
-        scanArgs = args;
+        params = args.optJSONObject(0);
 
         if (hasPermission()) {
             if (action.equals("scan")) {
@@ -42,14 +39,8 @@ public class ZBar extends CordovaPlugin {
                     callbackContext.error("A scan is already in progress!");
                 } else {
                     isInProgress = true;
-                    JSONObject params = args.optJSONObject(0);
-
-                    Context appCtx = cordova.getActivity().getApplicationContext();
-                    Intent scanIntent = new Intent(appCtx, ZBarScannerActivity.class);
-                    scanIntent.putExtra(ZBarScannerActivity.EXTRA_PARAMS, params.toString());
-                    cordova.startActivityForResult(this, scanIntent, SCAN_CODE);
+                    createScanActivity();
                 }
-                return true;
             } else if (action.equals("close")) {
                 ZBarScannerActivity.scan.finish();
                 return false;
@@ -58,8 +49,16 @@ public class ZBar extends CordovaPlugin {
             }
         } else {
             PermissionHelper.requestPermissions(this, 0, permissions);
-            return true;
         }
+
+        return true;
+    }
+
+    private void createScanActivity() {
+         Context appCtx = cordova.getActivity().getApplicationContext();
+         Intent scanIntent = new Intent(appCtx, ZBarScannerActivity.class);
+         scanIntent.putExtra(ZBarScannerActivity.EXTRA_PARAMS, params.toString());
+         cordova.startActivityForResult(this, scanIntent, SCAN_CODE);
     }
 
     // check application's permissions
@@ -72,17 +71,23 @@ public class ZBar extends CordovaPlugin {
         return true;
     }
 
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case CAMERA_PERMISSION_REQUEST: {
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    execute("scan", scanArgs, scanCallbackContext);
-                }
+    // Processes the result of permission request
+    public void onRequestPermissionResult(int requestCode, String[] permissions, int[] grantResults) throws JSONException {
+        if (grantResults.length > 0) {
+            Boolean hasAllPermissions = true;
 
-                return;
+            for (int r : grantResults) {
+                if (r == PackageManager.PERMISSION_DENIED) {
+                    hasAllPermissions = false;
+                    scanCallbackContext.error("Unknown error");
+                }
+            }
+
+            if (hasAllPermissions) {
+                createScanActivity();
             }
         }
-    }
+   }
 
     // External results handler
     @Override
